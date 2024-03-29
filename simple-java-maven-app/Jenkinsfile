@@ -27,19 +27,26 @@ pipeline {
         
         stage ('compile') {
             steps {
-                sh "mvn clean compile"
+                // Change directory to where the pom.xml file is located
+                dir('simple-java-maven-app/pom.xml') {
+                    sh "mvn clean compile"
+                }
             }
         }
         
         stage('Test') {
             steps {
-                sh "mvn test"
+                dir('simple-java-maven-app/pom.xml') {
+                    sh "mvn test"
+                }
             }
         }
 
         stage ('integration test') {
             steps {
-                sh "mvn failsafe:integration-test failsafe:verify"
+                dir('simple-java-maven-app/pom.xml') {
+                    sh "mvn failsafe:integration-test failsafe:verify"
+                }
             }
         }
         
