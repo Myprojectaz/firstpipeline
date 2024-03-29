@@ -1,16 +1,18 @@
 pipeline {
+    // Uncomment and specify Docker images if needed for specific stages
     // agent { docker { image 'maven:3.6.3'} }
     // agent { docker { image 'node:13.8'} }
     agent any
+    
     environment {
         dockerHome = tool 'myDocker'
         mavenHome = tool 'myMaven'
         PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
     }
+    
     stages {
         stage('checkout') {
             steps {
-                
                 sh 'mvn --version'
                 sh 'docker version'
                 echo "build"
@@ -22,13 +24,13 @@ pipeline {
                 echo "Build_url - $env.Build_url"
             }
         }
+        
         stage ('compile') {
             steps {
                 sh "mvn clean compile"
             }
         }
-    
-     
+        
         stage('Test') {
             steps {
                 sh "mvn test"
@@ -37,11 +39,10 @@ pipeline {
 
         stage ('integration test') {
             steps {
-                sh "mvn failesafe:integration-test failesafe:verify"
+                sh "mvn failsafe:integration-test failsafe:verify"
             }
         }
-    
-     
+        
         stage('deploy') {
             steps {
                 echo 'deploy stage'
