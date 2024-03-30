@@ -33,17 +33,17 @@ pipeline {
         
         stage('Test') {
             steps {
-                dir('simple-java-maven-app/pom.xml') {
+                    sh "cd /var/lib/jenkins/workspace/jenkins-devops-pipeline/simple-java-maven-app"
                     sh "mvn test"
                 }
-            }
         }
+        
 
         stage ('integration test') {
             steps {
-                dir('simple-java-maven-app/pom.xml') {
+                    sh "cd /var/lib/jenkins/workspace/jenkins-devops-pipeline/simple-java-maven-app"
                     sh "mvn failsafe:integration-test failsafe:verify"
-                }
+                
             }
         }
         
