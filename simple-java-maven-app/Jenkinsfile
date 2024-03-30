@@ -38,6 +38,13 @@ pipeline {
                 }
         }
         
+        stage('install') {
+            steps {
+                    sh "cd /var/lib/jenkins/workspace/jenkins-devops-pipeline/simple-java-maven-app"
+                    sh "mvn install"
+                }
+        }
+        
 
         stage ('integration test') {
             steps {
