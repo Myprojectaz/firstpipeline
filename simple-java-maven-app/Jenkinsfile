@@ -24,10 +24,10 @@ pipeline {
         stage ('compile') {
             steps {
                 // Change directory to where the pom.xml file is located
-                 {
+                 
                      sh "cd /var/lib/jenkins/workspace/jenkins-devops-pipeline/simple-java-maven-app"
                      sh "mvn clean compile"
-                }
+                
             }
         }
         
