@@ -57,7 +57,7 @@ pipeline {
         stage('build docker image') {
             steps {
                 script {
-                    dockerImage = docker.build("docker build -t yaswanth98/regapp:${env.BUILD_TAG}")
+                    dockerImage = docker.build("yaswanth98/regapp:${env.BUILD_TAG}")
                 }
             }
         }
