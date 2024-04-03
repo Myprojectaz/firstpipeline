@@ -54,9 +54,11 @@ pipeline {
             }
         }
         
-        stage('deploy') {
+        stage('build docker image') {
             steps {
-                echo 'deploy stage'
+                script {
+                    dockerImage = docker.build("docker build -t yaswanth98/regapp:${env.BUILD_TAG}")
+                }
             }
         }
     }
